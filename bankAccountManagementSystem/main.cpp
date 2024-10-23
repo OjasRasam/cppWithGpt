@@ -7,12 +7,12 @@ class Account {
     private:
         string accountHolder;
         int accountNumber;
-        double balance;
+        int balance;
         vector<string> transactionHistory; //To store the transaction history
 
     public:
         // Constructor
-        Account(string holderName, int accNo, double initialBalance) {
+        Account(string holderName, int accNo, int initialBalance) {
             accountHolder = holderName;
             accountNumber = accNo;
             balance = initialBalance;
@@ -27,7 +27,7 @@ class Account {
         }
 
         // Method to deposit money
-        void deposit(double amount) {
+        void deposit(int amount) {
             balance += amount;
             string transaction = "Deposited $" + to_string(amount) + ". New balance: $" + to_string(balance);
             transactionHistory.push_back(transaction);
@@ -35,7 +35,7 @@ class Account {
         }
 
         // Method to withdraw money
-        void withdraw(double amount) {
+        void withdraw(int amount) {
             if (amount > balance) {
                 cout << "Insufficient funds!" << endl;
                 transactionHistory.push_back("Failed withdrawal of $" + to_string(amount) + " due to insufficient funds.");
@@ -59,15 +59,23 @@ class Account {
 int main() {
     // Create a new account
     Account ojasAccount("Ojas Rasam", 19706, 5000000);
+    Account tanmayAccount("Tanmay Chavan", 10101, 10000);
 
     // Perform some transactions
     ojasAccount.deposit(1000001);
     ojasAccount.withdraw(2);
     ojasAccount.withdraw(1000000);
 
+    tanmayAccount.deposit(999);
+    tanmayAccount.withdraw(2000);
+    tanmayAccount.withdraw(10000);
+
     // Display account info and transaction history
     ojasAccount.displayInfo();
     ojasAccount.displayTransactionHistory();
+
+    tanmayAccount.displayInfo();
+    tanmayAccount.displayTransactionHistory();
 
     return 0;
 }
